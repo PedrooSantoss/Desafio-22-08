@@ -114,7 +114,7 @@ function sendErrorMsg(msg) {
 
 
 
-function sendsuccessMsg(msg) {
+function sendSuccessMsg(msg) {
     console.log("Passou pelo funcao sendsuccessMsg()");
 
     document.getElementById("approved-msg").innerHTML = msg;
@@ -124,16 +124,63 @@ function sendsuccessMsg(msg) {
     }, 4000);
 }
 
-    function createUser(){
-    console.log(getZodiacSign);
-    console.log(showRegister);
-    console.log(formatedCPF);
-    console.log(formatedCellphone);
-    console.log(valida_cpf);
-    console.log(sendErrorMsg);
-    console.log(sendsuccessMsg);
+class listUser {
+    constructor() {
+        this.users = []
     }
+    add(user) {
+        this.users.push(user);
+    }
+    remove(name) {
+        this.users.filter(user => user.name != name)
+    }
+    buscar(name) {
+        this.user.forEach(user => {
+            if (user.name == name) {
+                return user;
+            }
+        })
+    }
+    list(name) {
+        return this.user;
+    }
+}
 
+const listUsers = new listUser()
+function createUser() {
+    const name = document.getElementById("name").value;
+    const city = document.getElementById("city").value;
+    const email = document.getElementById("email").value;
+
+    const user = new User(name, city, email);
+
+    listUser.add(user);
+
+    userOnScreen();
+
+}
+
+function removeUser(name) {
+
+    listUsers.remove(name)
+
+    userOnScreen();
+}
+
+function userOnScreen() {
+    let html = ""
+
+    listUsers.users.forEach(user => {
+        html + `
+                <div>
+                    <p>Name: ${user.name}</p>
+                    <p>Name: ${user.city}</p>
+                    <p>Name: ${user.email}</p>
+                    <button  onclick="removeUser(${user.name})">Remover</button>
+                </div>
+                `;
+    })
+}
 // how many functions are there? 12
 // how many classes are there? 2
 
